@@ -53,6 +53,11 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:27.0.0')
 
+    //Mavericks
+    def mavericks_version = '2.1.0'
+    implementation "com.airbnb.android:mavericks:$mavericks_version"
+
+
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'

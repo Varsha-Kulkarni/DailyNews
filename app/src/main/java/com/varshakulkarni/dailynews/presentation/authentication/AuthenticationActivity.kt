@@ -1,32 +1,33 @@
 package com.varshakulkarni.dailynews.presentation.authentication
 
-import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.databinding.DataBindingUtil
+import com.airbnb.mvrx.MavericksView
+import com.airbnb.mvrx.withState
+import com.airbnb.mvrx.activityViewModel
 import com.firebase.ui.auth.AuthUI
-import com.firebase.ui.auth.IdpResponse
 import com.varshakulkarni.dailynews.R
 import com.varshakulkarni.dailynews.databinding.ActivityAuthenticationBinding
 import com.varshakulkarni.dailynews.presentation.news.NewsActivity
 
-const val SIGN_IN_CODE = 123
 const val TAG = "AuthenticationActivity"
 
-class AuthenticationActivity : AppCompatActivity() {
+class AuthenticationActivity : AppCompatActivity(), MavericksView {
     private lateinit var binding: ActivityAuthenticationBinding
+
+    private val authViewModel: AuthenticationViewModel by activityViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_authentication)
-
-        setupUI()
+//        setupUI()
     }
 
     private fun setupUI() {
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_authentication)
         binding.buttonLogin.setOnClickListener() {
             launchSignInFlow()
         }
@@ -37,23 +38,37 @@ class AuthenticationActivity : AppCompatActivity() {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
         )
+        val startForResult =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        startActivity(Intent(this, NewsActivity::class.java))
+                    }
+                    RESULT_CANCELED -> {
 
-        startActivityForResult(
-            AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers)
-                .build(), SIGN_IN_CODE
-        )
+                    }
+                    else -> {
+                    }
+                }
+            }
+        AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build()
+            .apply {
+                startForResult.launch(this)
+            }
+
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == SIGN_IN_CODE) {
-            val response = IdpResponse.fromResultIntent(data)
-            if (resultCode == Activity.RESULT_OK) {
+    override fun invalidate() = withState(authViewModel) { state ->
+        when (state.userState) {
+            UserState.AUTHENTICATED -> {
                 startActivity(Intent(this, NewsActivity::class.java))
-            } else {
-                Log.i(TAG, "Sign in unsuccessful ${response?.error?.errorCode}")
-                return
+                finish()
+            }
+            UserState.UNAUTHENTICATED -> {
+                binding = DataBindingUtil.setContentView(this, R.layout.activity_authentication)
+                binding.buttonLogin.setOnClickListener {
+                    launchSignInFlow()
+                }
             }
         }
     }

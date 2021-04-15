@@ -19,6 +19,8 @@ const val TAG = "AuthenticationActivity"
 class AuthenticationActivity : AppCompatActivity(), MavericksView {
     private lateinit var binding: ActivityAuthenticationBinding
 
+    //throwing error Unresolved Reference for activityViewModel:
+    // None of the following candidates is applicable because of receiver type mismatch..
     private val authViewModel: AuthenticationViewModel by activityViewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {

@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">DailyNews</string>
     <string name="welcome_to_news_app">Welcome to Daily News </string>
+    <string name="top_headlines">Top Headlines</string>
+    <string name="sources">Sources</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
 </resources>

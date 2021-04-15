@@ -7,4 +7,4 @@ enum class UserState{
     AUTHENTICATED, UNAUTHENTICATED
 }
 
-data class AuthenticationState(@PersistState val userState: UserState): MavericksState
+data class AuthenticationState(@PersistState val userState: UserState = UserState.UNAUTHENTICATED): MavericksState

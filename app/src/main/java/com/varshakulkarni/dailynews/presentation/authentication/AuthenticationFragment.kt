@@ -21,6 +21,20 @@ class AuthenticationFragment : Fragment(), MavericksView {
 
     private val authViewModel: AuthenticationViewModel by activityViewModel()
 
+    private val startForResult =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            when (result.resultCode) {
+                AppCompatActivity.RESULT_OK -> {
+                    startActivity(Intent(activity, NewsActivity::class.java))
+                }
+                AppCompatActivity.RESULT_CANCELED -> {
+
+                }
+                else -> {
+                }
+            }
+        }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,19 +58,6 @@ class AuthenticationFragment : Fragment(), MavericksView {
         val providers = arrayListOf(
             AuthUI.IdpConfig.EmailBuilder().build(), AuthUI.IdpConfig.GoogleBuilder().build()
         )
-        val startForResult =
-            registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-                when (result.resultCode) {
-                    AppCompatActivity.RESULT_OK -> {
-                        startActivity(Intent(activity, NewsActivity::class.java))
-                    }
-                    AppCompatActivity.RESULT_CANCELED -> {
-
-                    }
-                    else -> {
-                    }
-                }
-            }
 
         AuthUI.getInstance().createSignInIntentBuilder().setAvailableProviders(providers).build()
             .apply {

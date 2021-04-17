@@ -12,7 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.DailyNews">
-        <activity android:name=".presentation.news.NewsActivity"></activity>
+        <activity android:name=".presentation.news.NewsActivity" />
         <activity android:name=".presentation.authentication.AuthenticationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

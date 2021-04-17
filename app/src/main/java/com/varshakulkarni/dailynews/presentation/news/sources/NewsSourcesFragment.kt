@@ -1,16 +1,23 @@
-package com.varshakulkarni.dailynews.presentation.news.topheadlines
+package com.varshakulkarni.dailynews.presentation.news.sources
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import com.airbnb.mvrx.MavericksView
+import com.airbnb.mvrx.fragmentViewModel
+import com.airbnb.mvrx.withState
 import com.varshakulkarni.dailynews.databinding.FragmentSourcesBinding
+import dagger.hilt.android.AndroidEntryPoint
 
-class SourcesFragment : Fragment() {
+@AndroidEntryPoint
+class NewsSourcesFragment : Fragment(), MavericksView {
 
     private var _binding: FragmentSourcesBinding? = null
     private val binding get() = _binding ?: error("null Binding")
+
+    private val newsSourcesViewModel: NewsSourcesViewModel by fragmentViewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -20,6 +27,7 @@ class SourcesFragment : Fragment() {
         super.onCreate(savedInstanceState)
 
         _binding = FragmentSourcesBinding.inflate(inflater, container, false)
+
         return binding.root
 
     }
@@ -31,8 +39,14 @@ class SourcesFragment : Fragment() {
     }
 
     companion object {
-        fun newInstance(): SourcesFragment {
-            return SourcesFragment()
+        fun newInstance(): NewsSourcesFragment {
+            return NewsSourcesFragment()
+        }
+    }
+
+    override fun invalidate() {
+        withState(newsSourcesViewModel){
+
         }
     }
 }

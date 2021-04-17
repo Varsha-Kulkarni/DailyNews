@@ -9,7 +9,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Query
 
-private const val BASE_URL = "https://www.newsapi.org/v2/"
+private const val BASE_URL = "https://newsapi.org/v2/"
 
 private val gson = GsonBuilder().setLenient().create()
 

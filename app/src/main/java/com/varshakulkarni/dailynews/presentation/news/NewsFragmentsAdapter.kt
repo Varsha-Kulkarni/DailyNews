@@ -3,7 +3,7 @@ package com.varshakulkarni.dailynews.presentation.news
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.varshakulkarni.dailynews.presentation.news.topheadlines.SourcesFragment
+import com.varshakulkarni.dailynews.presentation.news.sources.NewsSourcesFragment
 import com.varshakulkarni.dailynews.presentation.news.topheadlines.TopHeadlinesFragment
 
 
@@ -15,7 +15,7 @@ class NewsFragmentsAdapter(fragmentActivity: FragmentActivity) :
                 return TopHeadlinesFragment.newInstance()
             }
             1 -> {
-                return SourcesFragment.newInstance()
+                return NewsSourcesFragment.newInstance()
             }
 
         }

@@ -1,7 +1,5 @@
 package com.varshakulkarni.dailynews.domain
 
-import com.google.gson.annotations.SerializedName
-
 data class NewsSource(
     var id: String?,
     var name: String?,

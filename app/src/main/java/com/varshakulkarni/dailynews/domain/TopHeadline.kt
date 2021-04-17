@@ -1,9 +1,9 @@
 package com.varshakulkarni.dailynews.domain
 
-import com.google.gson.annotations.SerializedName
+import com.varshakulkarni.dailynews.data.remote.models.TopHeadlineSource
 
 data class TopHeadline(
-    var source: String?,
+    var source: TopHeadlineSource?,
     var author: String?,
     var title: String?,
     var description: String?,

@@ -2,7 +2,9 @@ package com.varshakulkarni.dailynews
 
 import android.app.Application
 import com.airbnb.mvrx.Mavericks
+import dagger.hilt.android.HiltAndroidApp
 
+@HiltAndroidApp
 class DailyNewsApplication : Application() {
     override fun onCreate() {
         super.onCreate()

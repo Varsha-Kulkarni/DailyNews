@@ -1,4 +1,4 @@
-package com.varshakulkarni.dailynews.di
+package com.varshakulkarni.dailynews.di.viewmodel
 
 import com.airbnb.mvrx.MavericksViewModel
 import dagger.MapKey

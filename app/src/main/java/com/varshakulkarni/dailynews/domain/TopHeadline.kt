@@ -1,14 +1,14 @@
 package com.varshakulkarni.dailynews.domain
 
-import com.varshakulkarni.dailynews.data.remote.models.TopHeadlineSource
+import com.varshakulkarni.dailynews.data.network.models.TopHeadlineSource
 
 data class TopHeadline(
-    var source: TopHeadlineSource?,
-    var author: String?,
-    var title: String?,
-    var description: String?,
-    var url: String?,
-    var urlToImage: String?,
-    var publishedAt: String?,
-    var content: String?
+    val source: TopHeadlineSource?,
+    val author: String?,
+    val title: String?,
+    val description: String?,
+    val url: String?,
+    val urlToImage: String?,
+    val publishedAt: String?,
+    val content: String?
 )

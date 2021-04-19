@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="text_size_large">20sp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="headline_image_height">200dp</dimen>
+    <dimen name="horizontal_margin">16dp</dimen>
+    <dimen name="vertical_margin">8dp</dimen>
 </resources>

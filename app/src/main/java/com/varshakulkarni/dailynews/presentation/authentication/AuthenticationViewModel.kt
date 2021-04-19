@@ -4,12 +4,11 @@ import com.airbnb.mvrx.MavericksViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 
-class AuthenticationViewModel(state: AuthenticationState) :
-    MavericksViewModel<AuthenticationState>(state) {
+class AuthenticationViewModel(initialState: AuthenticationState) :
+    MavericksViewModel<AuthenticationState>(initialState) {
     init {
-        val firebaseAuth = FirebaseAuth.getInstance()
         setState {
-            copy(userState =  if (firebaseAuth.currentUser != null) {
+            copy(userState =  if (FirebaseAuth.getInstance().currentUser != null) {
                 UserState.AUTHENTICATED
             } else
                 UserState.UNAUTHENTICATED)

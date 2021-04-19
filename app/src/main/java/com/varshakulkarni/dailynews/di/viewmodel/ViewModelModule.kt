@@ -1,6 +1,5 @@
-package com.varshakulkarni.dailynews.di
+package com.varshakulkarni.dailynews.di.viewmodel
 
-import com.varshakulkarni.dailynews.di.MavericksViewModelComponent
 import com.varshakulkarni.dailynews.presentation.news.sources.NewsSourcesViewModel
 import com.varshakulkarni.dailynews.presentation.news.topheadlines.TopHeadlinesViewModel
 import dagger.Binds
@@ -16,6 +15,7 @@ interface ViewModelModule {
     @IntoMap
     @ViewModelKey(TopHeadlinesViewModel::class)
     fun topHeadlinesViewModelFactory(factory: TopHeadlinesViewModel.Factory): AssistedViewModelFactory<*, *>
+
     @Binds
     @IntoMap
     @ViewModelKey(NewsSourcesViewModel::class)

@@ -4,8 +4,8 @@ import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.varshakulkarni.dailynews.data.repository.NewsRepository
-import com.varshakulkarni.dailynews.di.AssistedViewModelFactory
-import com.varshakulkarni.dailynews.di.hiltMavericksViewModelFactory
+import com.varshakulkarni.dailynews.di.viewmodel.AssistedViewModelFactory
+import com.varshakulkarni.dailynews.di.viewmodel.hiltMavericksViewModelFactory
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -15,15 +15,22 @@ class TopHeadlinesViewModel @AssistedInject constructor(
 ) : MavericksViewModel<TopHeadlinesState>(topHeadlinesState) {
 
     init {
+        initTopHeadlines()
+        getTopHeadlines()
+    }
+
+    private fun getTopHeadlines() {
         setState {
             copy(topHeadlines = Loading())
         }
-
-       suspend {
-           newsRepository.getTopHeadlines()
-       }.execute{ copy(topHeadlines = it) }
-
     }
+
+    private fun initTopHeadlines() {
+        suspend {
+            newsRepository.getTopHeadlines()
+        }.execute { copy(topHeadlines = it) }
+    }
+
     @AssistedFactory
     interface Factory : AssistedViewModelFactory<TopHeadlinesViewModel, TopHeadlinesState> {
         override fun create(state: TopHeadlinesState): TopHeadlinesViewModel

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="topHeadline"
+            type="com.varshakulkarni.dailynews.domain.TopHeadline" />
+
+        <variable
+            name="clickListener"
+            type="com.varshakulkarni.dailynews.presentation.news.topheadlines.TopHeadlinesListAdapter.TopHeadlineClickListener" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/card_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:onClick="@{() -> clickListener.onCLick(topHeadline)">
+
+            <ImageView
+                android:id="@+id/iv_headline"
+                fetchImage="@{topHeadline.urlToImage}"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/headline_image_height" />
+
+            <TextView
+                android:id="@+id/tv_headline_title"
+                style="@style/TextAppearance.AppCompat.Headline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:text="@{topHeadline.title}"
+                tools:text="title" />
+
+            <TextView
+                android:id="@+id/tv_headline_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:text="@{topHeadline.description}"
+                tools:text="description" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

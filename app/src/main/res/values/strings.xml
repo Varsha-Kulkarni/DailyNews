@@ -5,4 +5,6 @@
     <string name="sources">Sources</string>
     <string name="login">Login</string>
     <string name="logout">Logout</string>
+    <string name="error_loading_headlines">Error loading Top Headlines</string>
+    <string name="error_loading_sources">Error loading Sources</string>
 </resources>

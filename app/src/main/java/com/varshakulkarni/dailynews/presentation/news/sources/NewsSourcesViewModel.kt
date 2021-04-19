@@ -4,8 +4,8 @@ import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.varshakulkarni.dailynews.data.repository.NewsRepository
-import com.varshakulkarni.dailynews.di.AssistedViewModelFactory
-import com.varshakulkarni.dailynews.di.hiltMavericksViewModelFactory
+import com.varshakulkarni.dailynews.di.viewmodel.AssistedViewModelFactory
+import com.varshakulkarni.dailynews.di.viewmodel.hiltMavericksViewModelFactory
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -15,15 +15,22 @@ class NewsSourcesViewModel @AssistedInject constructor(
 ) : MavericksViewModel<NewsSourcesState>(newsSourcesState) {
 
     init {
+        initNewsSources()
+        getNewsSources()
+    }
+
+    private fun initNewsSources() {
         setState {
             copy(newsSources = Loading())
         }
+    }
 
+    private fun getNewsSources() {
         suspend {
             newsRepository.getNewsSources()
-        }.execute{ copy(newsSources = it) }
-
+        }.execute { copy(newsSources = it) }
     }
+
     @AssistedFactory
     interface Factory : AssistedViewModelFactory<NewsSourcesViewModel, NewsSourcesState> {
         override fun create(state: NewsSourcesState): NewsSourcesViewModel

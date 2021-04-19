@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="newsSource"
+            type="com.varshakulkarni.dailynews.domain.NewsSource" />
+
+        <variable
+            name="clickListener"
+            type="com.varshakulkarni.dailynews.presentation.news.sources.NewsSourcesListAdapter.NewsSourceListener" />
+    </data>
+    <androidx.cardview.widget.CardView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/card_margin"
+        app:cardCornerRadius="@dimen/card_corner_radius"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:onClick="@{() -> clickListener.onClick(newsSource)}">
+
+            <TextView
+                android:id="@+id/tv_source_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:text="@{newsSource.name}"/>
+
+            <TextView
+                android:id="@+id/tv_source_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:text="@{newsSource.description}"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</layout>

@@ -1,6 +1,7 @@
 package com.varshakulkarni.dailynews.data.network.models
 
 import com.google.gson.annotations.SerializedName
+import com.varshakulkarni.dailynews.domain.TopHeadline
 
 data class TopHeadlinesResponse(
     @SerializedName("status") val status: String,
@@ -14,9 +15,9 @@ data class TopHeadlineSource(
 )
 
 data class Article(
-    @SerializedName("source") val source: TopHeadlineSource?,
+    @SerializedName("source") val source: TopHeadlineSource,
     @SerializedName("author") val author: String?,
-    @SerializedName("title") val title: String?,
+    @SerializedName("title") val title: String,
     @SerializedName("description") val description: String?,
     @SerializedName("url") val url: String?,
     @SerializedName("urlToImage") val urlToImage: String?,

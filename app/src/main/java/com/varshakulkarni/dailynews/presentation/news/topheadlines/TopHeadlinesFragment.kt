@@ -79,6 +79,7 @@ class TopHeadlinesFragment : Fragment(), MavericksView {
                 }
 
                 is Fail -> {
+                    binding.pbTopHeadlinesLoading.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.error_loading_headlines),

@@ -78,6 +78,7 @@ class NewsSourcesFragment : Fragment(), MavericksView {
                 }
 
                 is Fail -> {
+                    binding.pbSourcesLoading.visibility = View.GONE
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.error_loading_sources),

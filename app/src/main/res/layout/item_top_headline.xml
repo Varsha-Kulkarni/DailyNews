@@ -18,20 +18,22 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/card_margin"
-        app:cardCornerRadius="@dimen/card_corner_radius"
-        >
+        app:cardCornerRadius="@dimen/card_corner_radius">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:onClick="@{() -> clickListener.onCLick(topHeadline)">
+            android:onClick="@{() -> clickListener.onCLick(topHeadline)}"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_headline"
                 fetchImage="@{topHeadline.urlToImage}"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/headline_image_height" />
+                android:layout_height="@dimen/headline_image_height"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/tv_headline_title"
@@ -39,23 +41,58 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/horizontal_margin"
-                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/vertical_margin"
+                android:padding="@dimen/padding"
                 android:text="@{topHeadline.title}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/iv_headline"
                 tools:text="title" />
+
+            <TextView
+                android:id="@+id/tv_publishDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:padding="@dimen/padding"
+                android:text="@{topHeadline.publishedAt}"
+                android:textColor="@color/gray"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_title" />
+
+            <TextView
+                android:id="@+id/tv_source"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
+                android:layout_marginBottom="@dimen/vertical_margin"
+                android:padding="@dimen/padding"
+                android:text="@{topHeadline.source.name}"
+                android:textColor="@color/gray"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_title" />
 
             <TextView
                 android:id="@+id/tv_headline_description"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/horizontal_margin"
-                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginTop="@dimen/vertical_margin"
+                android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/vertical_margin"
+                android:padding="@dimen/padding"
                 android:text="@{topHeadline.description}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_publishDate"
                 tools:text="description" />
 
-        </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
     </androidx.cardview.widget.CardView>
 </layout>

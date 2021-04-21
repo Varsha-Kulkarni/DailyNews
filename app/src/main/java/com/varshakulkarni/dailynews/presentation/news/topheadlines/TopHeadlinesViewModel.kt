@@ -19,17 +19,19 @@ class TopHeadlinesViewModel @AssistedInject constructor(
         getTopHeadlines()
     }
 
-    private fun getTopHeadlines() {
+    private fun initTopHeadlines() {
         setState {
             copy(topHeadlines = Loading())
         }
     }
 
-    private fun initTopHeadlines() {
+    private fun getTopHeadlines() {
         suspend {
-            newsRepository.getTopHeadlines()
+            newsRepository.refreshTopHeadlines()
         }.execute { copy(topHeadlines = it) }
+        newsRepository.getAllTopHeadlines().execute { copy(topHeadlines = it) }
     }
+
 
     @AssistedFactory
     interface Factory : AssistedViewModelFactory<TopHeadlinesViewModel, TopHeadlinesState> {

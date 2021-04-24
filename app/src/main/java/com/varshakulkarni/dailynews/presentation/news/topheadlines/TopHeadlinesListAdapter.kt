@@ -42,14 +42,15 @@ class TopHeadlinesListAdapter(private val clickListener: TopHeadlineClickListene
 
     companion object TopHeadlineDiffCallback : DiffUtil.ItemCallback<TopHeadline>() {
         override fun areItemsTheSame(oldItem: TopHeadline, newItem: TopHeadline): Boolean =
-            oldItem === newItem
+            oldItem.title == newItem.title
 
         override fun areContentsTheSame(oldItem: TopHeadline, newItem: TopHeadline): Boolean =
             oldItem == newItem
     }
 
 
-    class TopHeadlineClickListener(val block: (TopHeadline) -> Unit) {
-        fun onCLick(topHeadline: TopHeadline) = block(topHeadline)
+    interface TopHeadlineClickListener {
+        fun onClickNewsItem(topHeadline: TopHeadline)
+        fun onClickReadingListButton(topHeadline: TopHeadline)
     }
 }

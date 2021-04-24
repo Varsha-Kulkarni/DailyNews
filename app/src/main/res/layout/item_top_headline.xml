@@ -5,6 +5,8 @@
 
     <data>
 
+        <import type="com.varshakulkarni.dailynews.utils.ExtensionsKt" />
+
         <variable
             name="topHeadline"
             type="com.varshakulkarni.dailynews.domain.TopHeadline" />
@@ -23,7 +25,6 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:onClick="@{() -> clickListener.onCLick(topHeadline)}"
             android:orientation="vertical">
 
             <ImageView
@@ -31,6 +32,7 @@
                 fetchImage="@{topHeadline.urlToImage}"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/headline_image_height"
+                android:contentDescription="@string/null_string"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -46,6 +48,7 @@
                 android:layout_marginBottom="@dimen/vertical_margin"
                 android:padding="@dimen/padding"
                 android:text="@{topHeadline.title}"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/iv_headline"
                 tools:text="title" />
@@ -55,28 +58,48 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/horizontal_margin"
-                android:layout_marginTop="@dimen/vertical_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
-                android:layout_marginBottom="@dimen/vertical_margin"
-                android:padding="@dimen/padding"
-                android:text="@{topHeadline.publishedAt}"
                 android:textColor="@color/gray"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_headline_title" />
+                app:layout_constraintStart_toEndOf="@id/button_readlist"
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_title"
+                app:publishedStringToDateFormat="@{topHeadline.publishedAt}" />
 
             <TextView
                 android:id="@+id/tv_source"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/horizontal_margin"
-                android:layout_marginTop="@dimen/vertical_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
-                android:layout_marginBottom="@dimen/vertical_margin"
-                android:padding="@dimen/padding"
-                android:text="@{topHeadline.source.name}"
+                android:text="@{@string/source(topHeadline.source.name)}"
                 android:textColor="@color/gray"
+                app:layout_constraintStart_toEndOf="@id/button_readlist"
+                app:layout_constraintTop_toBottomOf="@id/tv_publishDate" />
+
+            <View
+                android:id="@+id/clickableOverlay"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?attr/selectableItemBackground"
+                android:contentDescription="@string/null_string"
+                android:onClick="@{() -> clickListener.onClickNewsItem(topHeadline)}"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_headline_title" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/button_readlist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/horizontal_margin"
+                android:clickable="false"
+                android:contentDescription="@string/null_string"
+                android:onClick="@{() -> clickListener.onClickReadingListButton(topHeadline)}"
+                android:padding="@dimen/padding"
+                app:layout_constraintBottom_toTopOf="@id/tv_headline_description"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_title"
+                app:updateReadingList="@{topHeadline.isAddedToReadingList}" />
 
             <TextView
                 android:id="@+id/tv_headline_description"
@@ -86,11 +109,15 @@
                 android:layout_marginTop="@dimen/vertical_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/vertical_margin"
+                android:ellipsize="none"
                 android:padding="@dimen/padding"
+                android:scrollHorizontally="false"
                 android:text="@{topHeadline.description}"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_publishDate"
+                app:layout_constraintTop_toBottomOf="@id/tv_source"
                 tools:text="description" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

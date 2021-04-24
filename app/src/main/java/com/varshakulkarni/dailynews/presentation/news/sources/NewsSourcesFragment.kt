@@ -74,11 +74,18 @@ class NewsSourcesFragment : Fragment(), MavericksView {
 
                 is Success -> {
                     binding.pbSourcesLoading.visibility = View.GONE
-                    adapter.submitList(state.newsSources.invoke())
+                    val sources = state.newsSources.invoke()
+                    if (sources.isEmpty()) {
+                        binding.tvEmptySources.visibility = View.VISIBLE
+                    } else {
+                        binding.tvEmptySources.visibility = View.GONE
+                    }
+                    adapter.submitList(sources)
                 }
 
                 is Fail -> {
                     binding.pbSourcesLoading.visibility = View.GONE
+                    binding.tvEmptySources.visibility = View.VISIBLE
                     Toast.makeText(
                         requireContext(),
                         getString(R.string.error_loading_sources),

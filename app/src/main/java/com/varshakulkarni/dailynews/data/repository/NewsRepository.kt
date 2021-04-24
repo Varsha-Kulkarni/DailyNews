@@ -13,7 +13,7 @@ class NewsRepository @Inject constructor(
     private val newsDatabase: NewsDatabase
 ) : NewsDataSource {
 
-    override suspend fun refreshTopHeadlines(): List<TopHeadline> {
+    override suspend fun refreshTopHeadlines(): List<Long> {
         val response = newsApiService.getTopHeadlines("in")
         val topHeadlines = response.articles.map {
             TopHeadline(
@@ -28,16 +28,14 @@ class NewsRepository @Inject constructor(
                 false
             )
         }
-        newsDatabase.topHeadlineDao.insertAll(*topHeadlines.toTypedArray())
-
-        return topHeadlines
+        return newsDatabase.topHeadlineDao.insertAll(*topHeadlines.toTypedArray())
     }
 
-    override fun getAllTopHeadlines(): Flow<List<TopHeadline>> {
-        return newsDatabase.topHeadlineDao.getAllTopHeadlines()
-    }
+    override fun getAllTopHeadlines(): Flow<List<TopHeadline>> =
+        newsDatabase.topHeadlineDao.getAllTopHeadlines()
 
-    override suspend fun refreshNewsSources(): List<NewsSource> {
+
+    override suspend fun refreshNewsSources(): List<Long> {
         val response = newsApiService.getSources()
 
         val newsSources = response.sources.map {
@@ -51,12 +49,19 @@ class NewsRepository @Inject constructor(
                 it.country
             )
         }
-        newsDatabase.newsSourceDao.insertAll(*newsSources.toTypedArray())
-
-        return newsSources
+        return newsDatabase.newsSourceDao.insertAll(*newsSources.toTypedArray())
     }
 
-    override fun getAllNewsSources(): Flow<List<NewsSource>> {
-        return newsDatabase.newsSourceDao.getAllNewsSources()
+    override fun getAllNewsSources(): Flow<List<NewsSource>> =
+        newsDatabase.newsSourceDao.getAllNewsSources()
+
+    override suspend fun updateReadingList(topHeadline: TopHeadline): Int {
+        return if (topHeadline.isAddedToReadingList)
+            newsDatabase.topHeadlineDao.removeFromReadingList(topHeadline.title)
+        else newsDatabase.topHeadlineDao.addToReadingList(topHeadline.title)
     }
+
+    override fun getReadingList(): Flow<List<TopHeadline>> =
+        newsDatabase.topHeadlineDao.getReadingList()
+
 }

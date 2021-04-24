@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.RoomDatabase
-import androidx.room.Update
 import com.varshakulkarni.dailynews.domain.NewsSource
 import com.varshakulkarni.dailynews.domain.TopHeadline
 import kotlinx.coroutines.flow.Flow
@@ -20,8 +19,8 @@ abstract class NewsDatabase : RoomDatabase() {
 @Dao
 interface TopHeadlineDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg topHeadline: TopHeadline)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(vararg topHeadline: TopHeadline): List<Long>
 
     @Query("delete from top_headlines")
     suspend fun clear()
@@ -29,17 +28,20 @@ interface TopHeadlineDao {
     @Query("Select * from top_headlines")
     fun getAllTopHeadlines(): Flow<List<TopHeadline>>
 
-    @Query("Select * from top_headlines where addToReadingList=1")
-    fun getReadlingList(): Flow<List<TopHeadline>>
+    @Query("Select * from top_headlines where isAddedToReadingList=1")
+    fun getReadingList(): Flow<List<TopHeadline>>
 
-    @Update
-    fun updateReadingList(topHeadlineEntity: TopHeadline)
+    @Query("Update top_headlines set isAddedToReadingList=1 where title = :title")
+    suspend fun addToReadingList(title: String): Int
+
+    @Query("Update top_headlines set isAddedToReadingList=0 where title = :title")
+    suspend fun removeFromReadingList(title: String): Int
 }
 
 @Dao
 interface NewsSourceDao {
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAll(vararg newsSource: NewsSource)
+    @Insert(onConflict = OnConflictStrategy.IGNORE)
+    suspend fun insertAll(vararg newsSource: NewsSource): List<Long>
 
     @Query("delete from news_sources")
     suspend fun clear()

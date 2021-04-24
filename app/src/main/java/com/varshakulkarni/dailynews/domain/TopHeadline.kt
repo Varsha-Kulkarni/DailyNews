@@ -15,5 +15,5 @@ data class TopHeadline(
     val urlToImage: String?,
     val publishedAt: String?,
     val content: String?,
-    val addToReadingList: Boolean
+    var isAddedToReadingList: Boolean
 )

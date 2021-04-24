@@ -7,7 +7,8 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.multibindings.IntoMap
 
-
+/**
+ *  Hilt Module to provide DI to ViewModel*/
 @Module
 @InstallIn(MavericksViewModelComponent::class)
 interface ViewModelModule {

@@ -28,7 +28,7 @@ class NewsSourcesViewModel @AssistedInject constructor(
     private fun getNewsSources() {
         suspend {
             newsRepository.refreshNewsSources()
-        }.execute { copy(newsSources = it) }
+        }.execute { copy() }
         newsRepository.getAllNewsSources().execute { copy(newsSources = it) }
     }
 

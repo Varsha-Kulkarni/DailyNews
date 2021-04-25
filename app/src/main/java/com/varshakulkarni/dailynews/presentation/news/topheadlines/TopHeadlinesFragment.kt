@@ -55,19 +55,22 @@ class TopHeadlinesFragment : Fragment(), MavericksView,
         super.onViewCreated(view, savedInstanceState)
 
         adapter = TopHeadlinesListAdapter(this)
-        binding.rvTopHeadlines.adapter = adapter
+        binding.apply{
+            rvTopHeadlines.adapter = adapter
 
-        binding.refreshLayout.setOnRefreshListener {
-            topHeadlinesViewModel.getTopHeadlines()
-            binding.refreshLayout.isRefreshing = false
-        }
-        binding.refreshLayout.setProgressBackgroundColorSchemeColor(
-            resources.getColor(
-                R.color.colorPrimary,
-                context?.theme
+            refreshLayout.setOnRefreshListener {
+                topHeadlinesViewModel.getTopHeadlines()
+                binding.refreshLayout.isRefreshing = false
+            }
+            refreshLayout.setProgressBackgroundColorSchemeColor(
+                resources.getColor(
+                    R.color.colorPrimary,
+                    context?.theme
+                )
             )
-        )
-        binding.refreshLayout.setColorSchemeColors(Color.WHITE)
+            refreshLayout.setColorSchemeColors(Color.WHITE)
+        }
+
     }
 
     private fun openUrl(url: String?) {

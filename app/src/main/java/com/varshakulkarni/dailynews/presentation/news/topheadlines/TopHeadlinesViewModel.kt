@@ -3,7 +3,7 @@ package com.varshakulkarni.dailynews.presentation.news.topheadlines
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
-import com.varshakulkarni.dailynews.data.repository.NewsRepository
+import com.varshakulkarni.dailynews.data.NewsDataSource
 import com.varshakulkarni.dailynews.di.viewmodel.AssistedViewModelFactory
 import com.varshakulkarni.dailynews.di.viewmodel.hiltMavericksViewModelFactory
 import com.varshakulkarni.dailynews.domain.TopHeadline
@@ -11,8 +11,13 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
+/**
+ * This ViewModel Class gets the top headlines or reading list based on the boolean field
+ * isAddedToReadingList
+ *
+ */
 class TopHeadlinesViewModel @AssistedInject constructor(
-    @Assisted topHeadlinesState: TopHeadlinesState, private val newsRepository: NewsRepository
+    @Assisted topHeadlinesState: TopHeadlinesState, private val newsDataSource: NewsDataSource
 ) : MavericksViewModel<TopHeadlinesState>(topHeadlinesState) {
 
     init {
@@ -28,25 +33,25 @@ class TopHeadlinesViewModel @AssistedInject constructor(
 
     fun getTopHeadlines() {
         suspend {
-            newsRepository.refreshTopHeadlines()
+            newsDataSource.refreshTopHeadlines()
         }.execute {
             copy()
         }
 
-        newsRepository.getAllTopHeadlines().execute {
+        newsDataSource.getAllTopHeadlines().execute {
             copy(topHeadlines = it)
         }
     }
 
     fun updateReadList(topHeadline: TopHeadline) {
         suspend {
-            newsRepository.updateReadingList(topHeadline)
+            newsDataSource.updateReadingList(topHeadline)
         }.execute { copy() }
     }
 
     fun getReadingList() = withState { state ->
         if (state.topHeadlines is Loading) return@withState
-        newsRepository.getReadingList().execute { copy(topHeadlines = it) }
+        newsDataSource.getReadingList().execute { copy(topHeadlines = it) }
     }
 
     @AssistedFactory

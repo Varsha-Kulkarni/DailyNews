@@ -3,7 +3,7 @@ package com.varshakulkarni.dailynews.presentation.news.sources
 import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.MavericksViewModel
 import com.airbnb.mvrx.MavericksViewModelFactory
-import com.varshakulkarni.dailynews.data.repository.NewsRepository
+import com.varshakulkarni.dailynews.data.NewsDataSource
 import com.varshakulkarni.dailynews.di.viewmodel.AssistedViewModelFactory
 import com.varshakulkarni.dailynews.di.viewmodel.hiltMavericksViewModelFactory
 import dagger.assisted.Assisted
@@ -11,7 +11,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
 class NewsSourcesViewModel @AssistedInject constructor(
-    @Assisted newsSourcesState: NewsSourcesState, private val newsRepository: NewsRepository
+    @Assisted newsSourcesState: NewsSourcesState, private val newsDataSource: NewsDataSource
 ) : MavericksViewModel<NewsSourcesState>(newsSourcesState) {
 
     init {
@@ -27,9 +27,9 @@ class NewsSourcesViewModel @AssistedInject constructor(
 
     private fun getNewsSources() {
         suspend {
-            newsRepository.refreshNewsSources()
+            newsDataSource.refreshNewsSources()
         }.execute { copy() }
-        newsRepository.getAllNewsSources().execute { copy(newsSources = it) }
+        newsDataSource.getAllNewsSources().execute { copy(newsSources = it) }
     }
 
     @AssistedFactory

@@ -25,16 +25,16 @@ interface TopHeadlineDao {
     @Query("delete from top_headlines")
     suspend fun clear()
 
-    @Query("Select * from top_headlines")
+    @Query("select * from top_headlines order by publishedAt desc")
     fun getAllTopHeadlines(): Flow<List<TopHeadline>>
 
-    @Query("Select * from top_headlines where isAddedToReadingList=1")
+    @Query("select * from top_headlines where isAddedToReadingList=1 order by publishedAt desc")
     fun getReadingList(): Flow<List<TopHeadline>>
 
-    @Query("Update top_headlines set isAddedToReadingList=1 where title = :title")
+    @Query("update top_headlines set isAddedToReadingList=1 where title = :title")
     suspend fun addToReadingList(title: String): Int
 
-    @Query("Update top_headlines set isAddedToReadingList=0 where title = :title")
+    @Query("update top_headlines set isAddedToReadingList=0 where title = :title")
     suspend fun removeFromReadingList(title: String): Int
 }
 
@@ -46,6 +46,6 @@ interface NewsSourceDao {
     @Query("delete from news_sources")
     suspend fun clear()
 
-    @Query("Select * from news_sources")
+    @Query("select * from news_sources")
     fun getAllNewsSources(): Flow<List<NewsSource>>
 }

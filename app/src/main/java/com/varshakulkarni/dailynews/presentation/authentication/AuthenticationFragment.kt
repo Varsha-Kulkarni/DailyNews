@@ -15,6 +15,15 @@ import com.firebase.ui.auth.AuthUI
 import com.varshakulkarni.dailynews.databinding.FragmentAuthenticationBinding
 import com.varshakulkarni.dailynews.presentation.news.NewsActivity
 
+/**
+ *  Fragment to handle SignIn methods and authentication
+ *
+ *  Implements MavericksView method invalidate() to check the authentication state of the user
+ *
+ *  If user is already authenticated, launch NewsActivity
+ *  If not authenticated, request for Google SignIn or Email
+ */
+
 class AuthenticationFragment : Fragment(), MavericksView {
     private var _binding: FragmentAuthenticationBinding? = null
     private val binding get() = _binding ?: error("null Binding")
@@ -23,15 +32,8 @@ class AuthenticationFragment : Fragment(), MavericksView {
 
     private val startForResult =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            when (result.resultCode) {
-                AppCompatActivity.RESULT_OK -> {
-                    startActivity(Intent(activity, NewsActivity::class.java))
-                }
-                AppCompatActivity.RESULT_CANCELED -> {
-
-                }
-                else -> {
-                }
+            if (result.resultCode == AppCompatActivity.RESULT_OK) {
+                launchNewsActivity()
             }
         }
 
@@ -39,12 +41,10 @@ class AuthenticationFragment : Fragment(), MavericksView {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        super.onCreate(savedInstanceState)
+    ): View {
 
         _binding = FragmentAuthenticationBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onDestroyView() {
@@ -63,13 +63,12 @@ class AuthenticationFragment : Fragment(), MavericksView {
             .apply {
                 startForResult.launch(this)
             }
-
     }
 
     override fun invalidate() = withState(authViewModel) { state ->
         when (state.userState) {
             UserState.AUTHENTICATED -> {
-                startActivity(Intent(activity, NewsActivity::class.java))
+                launchNewsActivity()
             }
             UserState.UNAUTHENTICATED -> {
                 binding.buttonLogin.setOnClickListener {
@@ -77,5 +76,10 @@ class AuthenticationFragment : Fragment(), MavericksView {
                 }
             }
         }
+    }
+
+    private fun launchNewsActivity() {
+        startActivity(Intent(activity, NewsActivity::class.java))
+        activity?.finish()
     }
 }

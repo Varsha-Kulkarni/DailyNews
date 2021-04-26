@@ -6,11 +6,26 @@ This is the sample News app, showing top headlines from different news sources.
 second tab showing different news sources (from https://newsapi.org)
 - each News item can be viewed by clicking or can be saved into favorites.
 
-## Tech stacks used
-- Airbnb Mavericks for state management
-- Hilt for DI
-- Retrofit with gson for networking
-- Room for saving as favorite
+This app demonstrates the following views and techniques:
+
+* [Mavericks](https://github.com/airbnb/mavericks) to manage state.
+* [Retrofit](https://square.github.io/retrofit/) to make api calls to an HTTP web service.
+* [Picasso](https://square.github.io/picasso/) to load and cache images by URL.
+* [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) for DI
+* [Data Binding](https://developer.android.com/topic/libraries/data-binding/) with binding adapters
+* [Room](https://developer.android.com/training/data-storage/room) for local database storage.
+* [Flow](https://developer.android.com/kotlin/flow) to receive live updates from a database.
+* [Coroutines](https://developer.android.com/kotlin/coroutines) for asynchronous programming.
+* [Fragments](https://developer.android.com/guide/fragments) for UI.
+* [RecyclerView](https://developer.android.com/guide/topics/ui/layout/recyclerview) to display list
+of news data
+* [TabLayout](https://developer.android.com/guide/navigation/navigation-swipe-view-2)
+ to display tabs horizontally
+* [ViewPager2](https://developer.android.com/training/animation/screen-slide-2) to swipe views
+* [CardView](https://developer.android.com/guide/topics/ui/layout/cardview) to implement
+the Material Design card pattern with round corners and drop shadows.
+* [SwipeRefreshLayout](https://developer.android.com/training/swipe/add-swipe-interface) to implement
+swipe-to-refresh UI pattern
 
 ## License
 ```

@@ -11,6 +11,9 @@ import com.varshakulkarni.dailynews.R
 import com.varshakulkarni.dailynews.databinding.ItemNewsSourceBinding
 import com.varshakulkarni.dailynews.domain.NewsSource
 
+/**
+ *   adapter class to bind news sources data to the views
+ */
 class NewsSourcesListAdapter(private val clickListener: NewsSourceListener) :
     ListAdapter<NewsSource, NewsSourcesListAdapter.NewsSourceViewHolder>(NewsSourceDiffCallback) {
 

@@ -2,8 +2,12 @@ package com.varshakulkarni.dailynews.presentation.authentication
 
 import com.airbnb.mvrx.MavericksState
 
-enum class UserState{
+enum class UserState {
     AUTHENTICATED, UNAUTHENTICATED
 }
 
-data class AuthenticationState(val userState: UserState = UserState.UNAUTHENTICATED): MavericksState
+/**
+ *   This models the Authentication screen as a function of AuthenticationState
+ */
+data class AuthenticationState(val userState: UserState = UserState.UNAUTHENTICATED) :
+    MavericksState

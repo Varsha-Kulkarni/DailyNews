@@ -12,9 +12,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
 /**
- * This ViewModel Class gets the top headlines or reading list based on the boolean field
- * isAddedToReadingList
- *
+ * This ViewModel Class manages top headlines state, consumes the NewsDataSource dependency
  */
 class TopHeadlinesViewModel @AssistedInject constructor(
     @Assisted topHeadlinesState: TopHeadlinesState, private val newsDataSource: NewsDataSource

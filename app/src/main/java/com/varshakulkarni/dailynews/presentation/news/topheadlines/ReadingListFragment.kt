@@ -22,6 +22,15 @@ import com.varshakulkarni.dailynews.databinding.FragmentReadingListBinding
 import com.varshakulkarni.dailynews.domain.TopHeadline
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ *  Fragment shows top headlines saved for reading later
+ *
+ *  Implements MavericksView which has invalidate() method which handles UI state
+ *
+ *  Implements TopHeadlineClickListener methods:
+ *  onClickNewsItem() defines the action when each of the news item is clicked
+ *  onClickReadingListButton defines the action to update the Reading List
+ */
 @AndroidEntryPoint
 class ReadingListFragment : Fragment(), MavericksView,
     TopHeadlinesListAdapter.TopHeadlineClickListener {
@@ -57,7 +66,6 @@ class ReadingListFragment : Fragment(), MavericksView,
         binding.apply {
             rvReadingList.adapter = adapter
             rvReadingList.isNestedScrollingEnabled = false
-
 
             fabScrollUpReadingList.setOnClickListener {
                 rvReadingList.scrollToPosition(0)

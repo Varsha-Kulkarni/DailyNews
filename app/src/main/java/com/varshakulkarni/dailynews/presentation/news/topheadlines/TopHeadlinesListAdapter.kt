@@ -11,6 +11,9 @@ import com.varshakulkarni.dailynews.R
 import com.varshakulkarni.dailynews.databinding.ItemTopHeadlineBinding
 import com.varshakulkarni.dailynews.domain.TopHeadline
 
+/**
+ *   adapter class to bind top headlines data to the views
+ */
 class TopHeadlinesListAdapter(private val clickListener: TopHeadlineClickListener) :
     ListAdapter<TopHeadline, TopHeadlinesListAdapter.TopHeadlinesViewHolder>(TopHeadlineDiffCallback) {
 

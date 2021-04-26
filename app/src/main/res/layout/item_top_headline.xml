@@ -5,8 +5,6 @@
 
     <data>
 
-        <import type="com.varshakulkarni.dailynews.utils.ExtensionsKt" />
-
         <variable
             name="topHeadline"
             type="com.varshakulkarni.dailynews.domain.TopHeadline" />
@@ -59,10 +57,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/horizontal_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
-                android:textColor="@color/gray"
+                android:text="@{@string/published_at(topHeadline.publishedAt)}"
                 app:layout_constraintStart_toEndOf="@id/button_readlist"
-                app:layout_constraintTop_toBottomOf="@id/tv_headline_title"
-                app:publishedStringToDateFormat="@{topHeadline.publishedAt}" />
+                app:layout_constraintTop_toBottomOf="@id/tv_headline_title" />
 
             <TextView
                 android:id="@+id/tv_source"
@@ -71,7 +68,6 @@
                 android:layout_marginStart="@dimen/horizontal_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
                 android:text="@{@string/source(topHeadline.source.name)}"
-                android:textColor="@color/gray"
                 app:layout_constraintStart_toEndOf="@id/button_readlist"
                 app:layout_constraintTop_toBottomOf="@id/tv_publishDate" />
 
@@ -109,9 +105,7 @@
                 android:layout_marginTop="@dimen/vertical_margin"
                 android:layout_marginEnd="@dimen/horizontal_margin"
                 android:layout_marginBottom="@dimen/vertical_margin"
-                android:ellipsize="none"
                 android:padding="@dimen/padding"
-                android:scrollHorizontally="false"
                 android:text="@{topHeadline.description}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

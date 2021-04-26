@@ -6,7 +6,9 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import com.varshakulkarni.dailynews.presentation.news.sources.NewsSourcesFragment
 import com.varshakulkarni.dailynews.presentation.news.topheadlines.TopHeadlinesFragment
 
-
+/**
+ *  To insert child views that represent each tab/page, the layout is hooked to a FragmentStateAdapter
+ **/
 class NewsFragmentsAdapter(fragmentActivity: FragmentActivity) :
     FragmentStateAdapter(fragmentActivity) {
     override fun createFragment(position: Int): Fragment {

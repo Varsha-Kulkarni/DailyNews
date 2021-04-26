@@ -18,6 +18,15 @@ import com.varshakulkarni.dailynews.R
 import com.varshakulkarni.dailynews.databinding.FragmentSourcesBinding
 import dagger.hilt.android.AndroidEntryPoint
 
+/**
+ * Fragment shows the news sources from [News API](https://newsapi.org)
+ *
+ * Implements MavericksView which has invalidate() method which handles UI state
+ *
+ * Implements TopHeadlineClickListener methods:
+ * onClickNewsItem() defines the action when each of the news item is clicked
+ * onClickReadingListButton defines the action to update the Reading List
+ */
 @AndroidEntryPoint
 class NewsSourcesFragment : Fragment(), MavericksView {
 
@@ -32,13 +41,10 @@ class NewsSourcesFragment : Fragment(), MavericksView {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        super.onCreate(savedInstanceState)
+    ): View {
 
         _binding = FragmentSourcesBinding.inflate(inflater, container, false)
-
         return binding.root
-
     }
 
     override fun onDestroyView() {
@@ -53,7 +59,14 @@ class NewsSourcesFragment : Fragment(), MavericksView {
         adapter = NewsSourcesListAdapter(NewsSourcesListAdapter.NewsSourceListener {
             openUrl(it.url)
         })
-        binding.rvSources.adapter = adapter
+
+        binding.apply {
+            rvSources.adapter = adapter
+            fabScrollUpSources.setOnClickListener {
+                rvSources.smoothScrollToPosition(0)
+            }
+        }
+
     }
 
     private fun openUrl(url: String?) {

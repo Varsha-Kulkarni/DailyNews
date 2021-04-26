@@ -10,6 +10,9 @@ import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 
+/**
+ *   This ViewModel Class manages News Sources state, consumes the NewsDataSource dependency
+ */
 class NewsSourcesViewModel @AssistedInject constructor(
     @Assisted newsSourcesState: NewsSourcesState, private val newsDataSource: NewsDataSource
 ) : MavericksViewModel<NewsSourcesState>(newsSourcesState) {

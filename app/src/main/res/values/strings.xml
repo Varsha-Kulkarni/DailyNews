@@ -7,10 +7,12 @@
     <string name="logout">Logout</string>
     <string name="error_loading_headlines">Error loading Top Headlines! \n Check network connection.</string>
     <string name="error_loading_sources">Error loading Sources! \n Check network connection.</string>
-    <string name="bookmarked">Show ReadingList</string>
+    <string name="bookmarked">Show Reading List</string>
     <string name="empty_top_headlines_list">No News available!</string>
     <string name="empty_sources_list">No News Sources available!</string>
     <string name="empty_reading_list">Your reading list is empty! \n Start saving some news to read later.</string>
     <string name="source">Source: %s</string>
+    <string name="published_at">Published: %s</string>
     <string name="null_string">null</string>
+    <string name="refresh_news">Refresh News</string>
 </resources>

@@ -9,6 +9,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.varshakulkarni.dailynews.R
 import com.varshakulkarni.dailynews.databinding.FragmentNewsBinding
 
+/**
+ *  Container fragment to host TabLayout and Swipe Views using ViewPager2
+ */
 class NewsFragment : Fragment() {
     private var _binding: FragmentNewsBinding? = null
     private val binding get() = _binding ?: error("null Binding")

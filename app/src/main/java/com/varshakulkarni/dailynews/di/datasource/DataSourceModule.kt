@@ -1,4 +1,4 @@
-package com.varshakulkarni.dailynews.di
+package com.varshakulkarni.dailynews.di.datasource
 
 import com.varshakulkarni.dailynews.data.NewsDataSource
 import com.varshakulkarni.dailynews.data.repository.NewsRepository
@@ -8,7 +8,9 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-
+/**
+ *  provides dependency for DataSource interface
+ */
 @Module
 @InstallIn(SingletonComponent::class)
 abstract class DataSourceModule {

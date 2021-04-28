@@ -51,6 +51,7 @@ class TopHeadlinesFragment : Fragment(), MavericksView,
         setHasOptionsMenu(true)
 
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -68,7 +69,7 @@ class TopHeadlinesFragment : Fragment(), MavericksView,
         adapter = TopHeadlinesListAdapter(this)
         binding.apply {
             rvTopHeadlines.adapter = adapter
-            rvTopHeadlines.isNestedScrollingEnabled = false
+
             refreshLayout.setOnRefreshListener {
                 refreshContent()
             }
@@ -170,6 +171,9 @@ class TopHeadlinesFragment : Fragment(), MavericksView,
                 binding.refreshLayout.isRefreshing = true
                 refreshContent()
             }
+            R.id.delete_old_data ->
+                topHeadlinesViewModel.clearOldData()
+
         }
         return super.onOptionsItemSelected(item)
     }

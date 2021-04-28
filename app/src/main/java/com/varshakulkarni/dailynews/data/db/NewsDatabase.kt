@@ -46,8 +46,8 @@ interface TopHeadlineDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertAll(vararg topHeadline: TopHeadline): List<Long>
 
-    @Query("delete from top_headlines")
-    suspend fun clear()
+    @Query("delete from top_headlines where publishedAt < :daySevenDayAgo")
+    suspend fun deleteOldData(daySevenDayAgo: String): Int
 
     @Query("select * from top_headlines order by publishedAt desc")
     fun getAllTopHeadlines(): Flow<List<TopHeadline>>

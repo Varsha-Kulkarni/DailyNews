@@ -15,4 +15,5 @@
     <string name="published_at">Published: %s</string>
     <string name="null_string">null</string>
     <string name="refresh_news">Refresh News</string>
+    <string name="delete_old_data">Delete Old Data</string>
 </resources>

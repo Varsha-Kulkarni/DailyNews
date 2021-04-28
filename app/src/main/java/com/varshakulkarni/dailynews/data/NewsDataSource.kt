@@ -14,4 +14,5 @@ interface NewsDataSource {
     suspend fun updateReadingList(topHeadline: TopHeadline): Int
     fun getReadingList(): Flow<List<TopHeadline>>
 
+    suspend fun clearOldData(): Int
 }

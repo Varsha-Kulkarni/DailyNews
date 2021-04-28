@@ -41,6 +41,14 @@ class TopHeadlinesViewModel @AssistedInject constructor(
         }
     }
 
+    fun clearOldData() {
+        suspend {
+            newsDataSource.clearOldData()
+        }.execute {
+            copy()
+        }
+    }
+
     fun updateReadList(topHeadline: TopHeadline) {
         suspend {
             newsDataSource.updateReadingList(topHeadline)

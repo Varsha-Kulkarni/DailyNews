@@ -3,9 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/bookmarked"
-        android:title="@string/bookmarked" />
+        android:title="@string/bookmarked"
+        app:showAsAction="never" />
     <item
         android:id="@+id/refresh_content"
         android:title="@string/refresh_news"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/delete_old_data"
+        android:title="@string/delete_old_data"
         app:showAsAction="never" />
 </menu>

@@ -5,6 +5,7 @@ import com.varshakulkarni.dailynews.data.db.NewsDatabase
 import com.varshakulkarni.dailynews.data.network.NewsApiService
 import com.varshakulkarni.dailynews.domain.NewsSource
 import com.varshakulkarni.dailynews.domain.TopHeadline
+import com.varshakulkarni.dailynews.utils.getOneWeekOldDateFormatted
 import javax.inject.Inject
 import kotlinx.coroutines.flow.Flow
 
@@ -52,11 +53,14 @@ class NewsRepository @Inject constructor(
         newsDatabase.topHeadlineDao.getAllTopHeadlines()
 
 
+    override suspend fun clearOldData(): Int {
+        return newsDatabase.topHeadlineDao.deleteOldData(getOneWeekOldDateFormatted())
+    }
+
     /**
      *  Gets the latest news sources from the API and inserts into the database
      *  Returns the list of IDs inserted.
      */
-
     override suspend fun refreshNewsSources(): List<Long> {
         val response = newsApiService.getSources()
 
